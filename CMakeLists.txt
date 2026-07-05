@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25...3.31)
 
-project(my-project LANGUAGES CXX)
+project(ring-buffer-cpp LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -54,10 +54,10 @@ option(USE_SANITIZERS "Enable ASan/UBSan in Debug mode" ON)
 if(USE_SANITIZERS)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         set(SAN_FLAGS $<$<CONFIG:Debug>:-fsanitize=address,undefined -fno-omit-frame-pointer>)
-        
+
         target_compile_options(${PROJECT_NAME} PRIVATE ${SAN_FLAGS})
         target_link_options(${PROJECT_NAME} PRIVATE ${SAN_FLAGS})
-        
+
         target_compile_options(${PROJECT_NAME}-tests PRIVATE ${SAN_FLAGS})
         target_link_options(${PROJECT_NAME}-tests PRIVATE ${SAN_FLAGS})
     endif()

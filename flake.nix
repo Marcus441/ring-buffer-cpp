@@ -14,13 +14,9 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};
-      project = "myproject";
+      project = "ring-buffer-cpp";
       llvm_ver = "18";
       llvm_pkgs = pkgs."llvmPackages_${llvm_ver}";
-
-      # Interchangeable toolchains: the compiler comes from the stdenv, so
-      # both keep the platform-default C++ stdlib (libstdc++ on Linux) --
-      # only the compiler driver differs.
       toolchains = {
         clang = {
           stdenv = llvm_pkgs.stdenv;
@@ -51,8 +47,6 @@
           cmakeFlags = [
             "-DCMAKE_BUILD_TYPE=Release"
             "-DUSE_SANITIZERS=OFF"
-            # no network in the sandbox: use gtest from checkInputs instead
-            # of FetchContent (see the disconnected branch in CMakeLists.txt)
             "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
           ];
 
@@ -60,8 +54,6 @@
           checkPhase = "ctest --output-on-failure";
         };
 
-      # CC/CXX point at the toolchain's compiler via the shell's stdenv;
-      # clang-tools (clangd, clang-format, clang-tidy) ride along in both.
       mkDevShell = name: toolchain:
         (pkgs.mkShell.override {inherit (toolchain) stdenv;}) {
           name = "${project}-${name}-shell";
