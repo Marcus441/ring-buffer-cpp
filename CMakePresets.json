@@ -1,0 +1,50 @@
+{
+  "version": 8,
+  "configurePresets": [
+    {
+      "name": "default",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_COLOR_DIAGNOSTICS": "ON",
+        "CMAKE_DEFAULT_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "-pedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wunused",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -Og",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "default",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "default",
+      "configuration": "Release"
+    },
+    {
+      "name": "relwithdebinfo",
+      "configurePreset": "default",
+      "configuration": "RelWithDebInfo"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "default",
+      "configuration": "Debug",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "release",
+      "configurePreset": "default",
+      "configuration": "Release",
+      "output": { "outputOnFailure": true }
+    }
+  ]
+}
