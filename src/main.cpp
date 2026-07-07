@@ -6,15 +6,15 @@ class RingBuffer {
   int size{};
   int writeIdx{};
   int readIdx{};
-  // todo: remove the array, no stl allowed
-  std::array<int, sizeof(size_t)> val_buf{};
+  int *val_buf;
 
  public:
-  RingBuffer(int capacity) : capacity{capacity} {}
+  RingBuffer(int capacity) : capacity{capacity}, val_buf{new int[capacity]{}} {}
+  ~RingBuffer() { delete[] val_buf; }
   int Size() const { return size; }
   int Capacity() const { return capacity; }
-  bool Full() { return ((writeIdx + 1) % capacity == readIdx); };
-  bool Empty() { return (readIdx == writeIdx); };
+  bool Full() const { return ((writeIdx + 1) % capacity == readIdx); };
+  bool Empty() const { return (readIdx == writeIdx); };
   bool Put(int item) {
     if (Full()) {
       return false;
