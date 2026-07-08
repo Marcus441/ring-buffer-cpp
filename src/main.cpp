@@ -11,10 +11,12 @@ class RingBuffer {
  public:
   RingBuffer(int capacity) : capacity{capacity}, val_buf{new int[capacity]{}} {}
   ~RingBuffer() { delete[] val_buf; }
+
   int Size() const { return size; }
   int Capacity() const { return capacity; }
-  bool Full() const { return ((writeIdx + 1) % capacity == readIdx); };
-  bool Empty() const { return (readIdx == writeIdx); };
+  bool Full() const { return size == capacity; };
+  bool Empty() const { return size == 0; };
+
   bool Put(int item) {
     if (Full()) {
       return false;
@@ -24,11 +26,12 @@ class RingBuffer {
     size++;
     return true;
   }
+
   bool Get(int &item) {
     if (Empty()) {
       return false;
     }
-    item = std::move(val_buf[readIdx]);
+    item = val_buf[readIdx];
     readIdx = (readIdx + 1) % capacity;
     size--;
     return true;
