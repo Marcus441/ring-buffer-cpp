@@ -1,18 +1,13 @@
-# Project Name
+# Ring Buffer Cpp
 
-A minimalist C++23 project template, configured for performance and memory safety.
+A minimalist C++23 ring buffer.
 
 ## Features
-- **C++23** with interchangeable **Clang / GCC** toolchains (Clang by default;
-  both use the platform-default stdlib, libstdc++ on Linux)
-- **CMake & Ninja** (with `CMakePresets.json`)
-- **GoogleTest** integration
-- **Address & Undefined Behavior Sanitizers** (enabled in Debug mode)
-- **Nix Flake** for a reproducible hermetic environment
+- Raw dynamically allocated array to reduce reliance on stl.
 
 ## Prerequisites
 - [Nix](https://nixos.org/download.html) (with flakes enabled)
-- *Optional but recommended:* [direnv](https://direnv.net/)
+- *Optional:* [direnv](https://direnv.net/)
 
 ## Development Setup
 
