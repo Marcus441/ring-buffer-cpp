@@ -46,6 +46,9 @@ else()
 endif()
 
 add_executable(${PROJECT_NAME}-tests tests/main_test.cpp)
+target_include_directories(${PROJECT_NAME}-tests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 target_link_libraries(${PROJECT_NAME}-tests PRIVATE gtest_main gmock_main)
 add_test(NAME ${PROJECT_NAME}-tests COMMAND ${PROJECT_NAME}-tests)
 
