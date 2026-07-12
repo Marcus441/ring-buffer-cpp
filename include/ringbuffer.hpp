@@ -18,12 +18,14 @@ class RingBuffer {
   bool Empty() const { return size == 0; };
 
   bool Put(int item) {
-    if (Full()) {
-      return false;
-    }
+    if (capacity == 0) return false;
+    if (Full()) readIdx = (readIdx + 1) % capacity;
     val_buf[writeIdx] = item;
     writeIdx = (writeIdx + 1) % capacity;
-    size++;
+
+    if (!Full()) {
+      size++;
+    }
     return true;
   }
 

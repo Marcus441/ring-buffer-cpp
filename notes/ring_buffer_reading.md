@@ -3,9 +3,9 @@
 ## Priority 1 — Dynamic Memory (Ch. 19)
 - [x] [19.1 Dynamic memory allocation with new and delete](https://www.learncpp.com/cpp-tutorial/dynamic-memory-allocation-with-new-and-delete/)
   - the scalar mechanism, before jumping to arrays.
-- [ ] [19.2 Dynamically allocating arrays](https://www.learncpp.com/cpp-tutorial/dynamically-allocating-arrays/)
+- [x] [19.2 Dynamically allocating arrays](https://www.learncpp.com/cpp-tutorial/dynamically-allocating-arrays/)
   - directly answers `int* val_buf = new int[capacity]` and the matching `delete[]`.
-- [ ] [19.3 Destructors](https://www.learncpp.com/cpp-tutorial/destructors/)
+- [x] [19.3 Destructors](https://www.learncpp.com/cpp-tutorial/destructors/)
   - shows that for a class managing raw dynamic memory, you must explicitly `delete[]` it in a hand-written destructor, since the compiler-generated one only destroys the pointer variable, not the memory it points to.
 
 ## Priority 2 
