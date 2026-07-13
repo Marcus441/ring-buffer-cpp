@@ -11,7 +11,16 @@ class RingBuffer {
  public:
   RingBuffer(int capacity) : capacity{capacity}, val_buf{new int[capacity]{}} {}
   ~RingBuffer() { delete[] val_buf; }
-
+  RingBuffer(const RingBuffer &rb)
+      : capacity{rb.capacity},
+        size{rb.size},
+        writeIdx{rb.writeIdx},
+        readIdx{rb.readIdx},
+        val_buf{new int[rb.capacity]} {
+    for (size_t i = 0; i < (size_t)rb.capacity; ++i) {
+      val_buf[i] = rb.val_buf[i];
+    }
+  }
   int Size() const { return size; }
   int Capacity() const { return capacity; }
   bool Full() const { return size == capacity; };
