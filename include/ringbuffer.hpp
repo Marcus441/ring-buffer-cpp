@@ -21,6 +21,19 @@ class RingBuffer {
       val_buf[i] = rb.val_buf[i];
     }
   }
+  RingBuffer &operator=(const RingBuffer &other) {
+    int *new_buf = new int[other.capacity];
+    for (size_t i = 0; i < (size_t)other.capacity; ++i) {
+      new_buf[i] = other.val_buf[i];
+    }
+    delete[] val_buf;
+    val_buf = new_buf;
+    capacity = other.capacity;
+    size = other.size;
+    writeIdx = other.writeIdx;
+    readIdx = other.readIdx;
+    return *this;
+  }
   int Size() const { return size; }
   int Capacity() const { return capacity; }
   bool Full() const { return size == capacity; };
