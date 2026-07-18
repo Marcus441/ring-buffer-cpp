@@ -9,9 +9,9 @@
   - shows that for a class managing raw dynamic memory, you must explicitly `delete[]` it in a hand-written destructor, since the compiler-generated one only destroys the pointer variable, not the memory it points to.
 
 ## Priority 2 
-- [ ] [14.9 Introduction to constructors](https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/)
-- [ ] [14.14 Introduction to the copy constructor](https://www.learncpp.com/cpp-tutorial/introduction-to-the-copy-constructor/)
+- [x] [14.9 Introduction to constructors](https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/)
+- [x] [14.14 Introduction to the copy constructor](https://www.learncpp.com/cpp-tutorial/introduction-to-the-copy-constructor/)
   - why the compiler's default copy is dangerous once a class owns a raw pointer.
-- [ ] [15.4 Introduction to destructors](https://www.learncpp.com/cpp-tutorial/introduction-to-destructors/)
+- [x] [15.4 Introduction to destructors](https://www.learncpp.com/cpp-tutorial/introduction-to-destructors/)
   - class-specific companion to 19.3.
 
