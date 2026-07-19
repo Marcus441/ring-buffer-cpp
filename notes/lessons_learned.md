@@ -75,4 +75,29 @@ int main() {
 
 ## Ring Buffer Mechanics
 
-
+- Fundamentally, a ring buffer is a queue data structure with a fixed capacity,
+  a read index, and a write index.
+- Uses FIFO
+  - If an element is removed, it is the oldest element in the queue
+- When an element is removed, the read index is incremented
+  - Removed elements are still in the buffer, they are just waiting to be
+    overwritten by newer elements.
+- If it is full and a write is performed, the oldest data is overwritten
+  - on full write, either reject or overwrite oldest (lossy/freshest data wins;
+    my choice).
+- The key logic around the ring buffer read and write index is the wrap around 
+  mechanism
+  - If the index is equal to capacity, we need to wrap to 0, hence when a 
+    ring buffer cursor is incremented, we use modulo arithmetic 
+    `(idx + 1) % capacity`
+- The tracked size of the ring buffer must not be negative, or greater than the 
+  capacity.
+  - In the put logic, size is only incremented if not `Full()`.
+  - Size is always decremented on `Get()`, this is only possible due to the early
+    return on empty (so that size does not go negative).
+- When full, readIdx and writeIdx are both equal and are pointing to the oldest 
+  element. Overwriting when full advances both in lockstep with one another. So
+  the equality and readIdx's claim on the oldest survivor is preserved through 
+  every overwrite. 
+  - I originally wrote a bug where readIdx would not be incremented, which made 
+    it point to the newest element. 
