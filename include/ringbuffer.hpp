@@ -8,24 +8,24 @@ class RingBuffer {
   int size{};
   int writeIdx{};
   int readIdx{};
-  int *val_buf;
+  int* val_buf;
 
  public:
   RingBuffer(int capacity) : capacity{capacity}, val_buf{new int[capacity]{}} {}
   ~RingBuffer() { delete[] val_buf; }
-  RingBuffer(const RingBuffer &rb)
+  RingBuffer(const RingBuffer& rb)
       : capacity{rb.capacity},
         size{rb.size},
         writeIdx{rb.writeIdx},
         readIdx{rb.readIdx},
         val_buf{new int[rb.capacity]} {
-    for (size_t i = 0; i < (size_t)rb.capacity; ++i) {
+    for (size_t i = 0; i < static_cast<size_t>(rb.capacity); ++i) {
       val_buf[i] = rb.val_buf[i];
     }
   }
   RingBuffer &operator=(const RingBuffer &other) {
-    int *new_buf = new int[other.capacity];
-    for (size_t i = 0; i < (size_t)other.capacity; ++i) {
+    int* new_buf = new int[other.capacity];
+    for (size_t i = 0; i < static_cast<size_t>(other.capacity); ++i) {
       new_buf[i] = other.val_buf[i];
     }
     delete[] val_buf;
@@ -38,8 +38,8 @@ class RingBuffer {
   }
   int Size() const { return size; }
   int Capacity() const { return capacity; }
-  bool Full() const { return size == capacity; };
-  bool Empty() const { return size == 0; };
+  bool Full() const { return size == capacity; }
+  bool Empty() const { return size == 0; }
 
   bool Put(int item) {
     if (capacity == 0) return false;
@@ -53,7 +53,7 @@ class RingBuffer {
     return true;
   }
 
-  bool Get(int &item) {
+  bool Get(int& item) {
     if (Empty()) {
       return false;
     }
