@@ -11,7 +11,7 @@ class RingBuffer {
   int* val_buf;
 
  public:
-  RingBuffer(int capacity) : capacity{capacity}, val_buf{new int[capacity]{}} {}
+  explicit RingBuffer(int capacity) : capacity{capacity}, val_buf{new int[capacity]{}} {}
   ~RingBuffer() { delete[] val_buf; }
   RingBuffer(const RingBuffer& rb)
       : capacity{rb.capacity},
